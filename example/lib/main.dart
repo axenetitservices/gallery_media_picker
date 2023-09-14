@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:better_video_player/better_video_player.dart';
+import 'package:better_player/better_player.dart';
 import 'package:example/src/provider/imageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +25,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -35,13 +35,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Example(),
+      home: Example(),
     );
   }
 }
 
 class Example extends StatefulWidget {
-  const Example({Key key}) : super(key: key);
+  const Example({Key? key}) : super(key: key);
 
   @override
   State<Example> createState() => _ExampleState();
@@ -112,19 +112,18 @@ class _ExampleState extends State<Example> {
                                 if (mounted) {
                                   return AspectRatio(
                                     aspectRatio: 16.0 / 9.0,
-                                    child: BetterVideoPlayer(
-                                      configuration:
-                                          const BetterVideoPlayerConfiguration(
-                                        looping: true,
-                                        autoPlay: true,
-                                        allowedScreenSleep: false,
-                                        autoPlayWhenResume: true,
-                                      ),
-                                      controller: BetterVideoPlayerController(),
-                                      dataSource: BetterVideoPlayerDataSource(
-                                        BetterVideoPlayerDataSourceType.file,
-                                        data.path,
-                                      ),
+                                    child: BetterPlayer(
+                                      controller: BetterPlayerController(
+                                          const BetterPlayerConfiguration(
+                                            looping: true,
+                                            autoPlay: true,
+                                            allowedScreenSleep: false,
+                                          ),
+                                          betterPlayerDataSource:
+                                              BetterPlayerDataSource(
+                                                  BetterPlayerDataSourceType
+                                                      .file,
+                                                  data.path)),
                                     ),
                                   );
                                 } else {
@@ -150,7 +149,7 @@ class _ExampleState extends State<Example> {
                       imageBackgroundColor: Colors.black,
                       selectedCheckColor: Colors.black87,
                       selectedBackgroundColor: Colors.black,
-                      gridViewBackgroundColor: Colors.grey[900],
+                      gridViewBackgroundColor: Colors.grey[900]!,
                       selectedCheckBackgroundColor: Colors.white10,
                       appBarLeadingWidget: Align(
                         alignment: Alignment.bottomRight,
